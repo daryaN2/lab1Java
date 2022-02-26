@@ -3,7 +3,6 @@ import java.io.*;
 public class Main {
     public static void main(String args[]) {
         Reader reader = null;
-        FileWriter writer = null;
         try {
             reader = new InputStreamReader(new FileInputStream("C:\\Users\\Darya\\IdeaProjects\\lab1Java\\src\\in.txt"));
             BufferedReader breader = new BufferedReader(reader);
