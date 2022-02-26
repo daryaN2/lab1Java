@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Counter {
     private int count;
@@ -34,17 +32,30 @@ public class Counter {
                 }
             }
         }
-        Map <String, Integer> words = new TreeMap<>(unsortWords);
+        ArrayList <Map.Entry<String, Integer>> words = new ArrayList<>();
+        for(Map.Entry<String, Integer> e: unsortWords.entrySet()) {
+            words.add(e);
+        }
+        Comparator<Map.Entry<String, Integer>> myComparator = new Comparator<>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) {
+                        Integer int1 = e1.getValue();
+                        Integer int2 = e2.getValue();
+                        return int2.compareTo(int1);
+                    }
+                };
+
+        Collections.sort (words, myComparator);
         writeData(words);
     }
 
 
-    public void writeData(Map<String, Integer> map)  {
+    public void writeData(List <Map.Entry<String, Integer>> list)  {
         FileWriter writer = null;
          try {
              writer = new FileWriter("C:\\Users\\Darya\\IdeaProjects\\lab1Java\\src\\out.csv");
-             for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue() + "," + entry.getValue()*100/count + "%\n");
+             for (Map.Entry<String, Integer> e: list) {
+                 writer.write(e.getKey() + "," + e.getValue() + "," + e.getValue()*100/count + "%\n");
              }
          }
          catch (IOException e) {
