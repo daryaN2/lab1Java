@@ -14,37 +14,27 @@ public class Counter {
             for (int i = 0; i < line.length(); ++i) {
                 if (!Character.isLetterOrDigit(line.charAt(i))) {
                     if (unsortWords.containsKey(word.toString())) {
-                        System.out.println("Repeat");
                         unsortWords.put(word.toString(), (unsortWords.get(word.toString())+1));
                     } else {
-                        System.out.println("New");
                         unsortWords.put(word.toString(), 1);
                     }
-                    System.out.println("Word " + word);
                     word.delete(0, word.length());
                     ++count;
                 } else if ((i+1 == line.length()) & Character.isLetterOrDigit(line.charAt(i))) {
                     word.append(line.charAt(i));
                     if (unsortWords.containsKey(word.toString())) {
-                        System.out.println("Repeat");
                         unsortWords.put(word.toString(), (unsortWords.get(word.toString())+1));
                     } else {
-                        System.out.println("New");
                         unsortWords.put(word.toString(), 1);
                     }
-                    System.out.println("Word " + word);
                     word.delete(0, word.length());
                     ++count;
                 }else {
-                    System.out.println("Symbol " + line.charAt(i));
                     word.append(line.charAt(i));
                 }
             }
         }
         Map <String, Integer> words = new TreeMap<>(unsortWords);
-        for (Map.Entry<String, Integer> entry : words.entrySet()) {
-            System.out.println("Key: " + entry.getKey() + ". Value: " + entry.getValue());
-        }
         writeData(words);
     }
 
