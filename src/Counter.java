@@ -44,7 +44,6 @@ public class Counter {
                         return int2.compareTo(int1);
                     }
                 };
-
         Collections.sort (words, myComparator);
         writeData(words);
     }
